@@ -3,8 +3,12 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-const UserForm = ({values, errors, touched}) =>{
-    const [user, setUser] = useState([])
+const UserForm = ({values, errors, touched, status}) =>{
+    const [users, setUsers] = useState([]);
+    useEffect(()=>{
+        console.log('status has changed', status);
+        status && setUsers(users =>[...users, status])
+    }, [status])
     return(
         <div className='form-container'>
             <Form>
@@ -19,12 +23,21 @@ const UserForm = ({values, errors, touched}) =>{
                 <label htmlFor='password'>Password:
                     <Field id='password' name='password' type='password' placeholder='Name'/>
                 </label>
-                <label htmlFor='tosCheck'>I agree with Terms of Service
+                <label htmlFor='tosCheck'>Join or Die: 
                     <Field id='tosCheck' name='tosCheck' type='checkbox' checked={values.tosCheck}/>
                 </label>
                 <button type='submit'>Submit</button>
             </Form>
             {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
+            {users.map(user => {
+                return (
+                    <ul key={user.id}>
+                    <li>Name: {user.name}</li>
+                    <li>Email: {user.email}</li>
+                    </ul>
+                );
+            })
+            }
         </div>
     )
 
@@ -45,9 +58,17 @@ const FormikUserForm = withFormik({
         email: Yup.string().required()
 
     }),
-    handleSubmit(values, formikBag){
+    handleSubmit(values, {setStatus}){
         console.log("submitting", values)
-        axios.post('')
+        axios.post('https://reqres.in/api/users', values)
+        .then(response => {
+            console.log('success', response)
+            setStatus(response.data)
+            
+        })
+        .catch(error => {
+            console.log(error.response)
+        })
     }
 })(UserForm);
 

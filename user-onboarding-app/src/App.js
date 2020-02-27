@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Onboard Here!</h1>
+        <h1>Inquisitor Conscription Form</h1>
       </header>
       <br></br>
       <UserForm />
