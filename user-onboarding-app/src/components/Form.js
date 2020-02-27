@@ -6,23 +6,23 @@ import axios from "axios";
 const Form = () =>{
     <div className='form-container'>
         <Form>
-            <label>
-                <Field/>
+            <label htmlFor='name'>Name:
+                <Field id='name'/>
             </label>
-            <label>
-                <Field/>
+            <label htmlFor='email'>Email:
+                <Field id='email'/>
             </label>
-            <label>
-                <Field/>
+            <label htmlFor='password'>Password:
+                <Field id='password'/>
             </label>
-            <label>
-                <Field/>
+            <label htmlFor='tosCheck'>I agree with Terms of Service
+                <Field id='tosCheck'/>
             </label>
-            <label>
-                <Field/>
-            </label>
+            <button type='submit'>Submit</button>
         </Form>
     </div>
 }
+
+const formikForm = withFormik({})(Form);
 
 export default Form
