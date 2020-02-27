@@ -3,7 +3,7 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-const UserForm = ({values, handleChange}) =>{
+const UserForm = ({values, errors, touched}) =>{
     const [user, setUser] = useState([])
     return(
         <div className='form-container'>
@@ -11,9 +11,11 @@ const UserForm = ({values, handleChange}) =>{
                 <label htmlFor='name'>Name:
                     <Field id='name' name='name' type='text' placeholder='Name'/>
                 </label>
+                {touched.name && errors.name && <p className='error'>{errors.name}</p>}
                 <label htmlFor='email'>Email:
                     <Field id='email' name='email' type='email' placeholder='Valid Email'/>
                 </label>
+                {touched.name && errors.name && <p className='error'>{errors.email}</p>}
                 <label htmlFor='password'>Password:
                     <Field id='password' name='password' type='password' placeholder='Name'/>
                 </label>
@@ -37,6 +39,15 @@ const FormikUserForm = withFormik({
             password: password || '',
             tosCheck: tosCheck || false
         }
+    },
+    validationSchema: Yup.object().shape({
+        name: Yup.string().required("Name is required, must be letters."),
+        email: Yup.string().required()
+
+    }),
+    handleSubmit(values, formikBag){
+        console.log("submitting", values)
+        axios.post('')
     }
 })(UserForm);
 
