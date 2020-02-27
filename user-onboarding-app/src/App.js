@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from './components/Form'
+import UserForm from './components/Form'
 import logo from './logo.svg';
 import './App.css';
 
@@ -9,7 +9,8 @@ function App() {
       <header className="App-header">
         <h1>Onboard Here!</h1>
       </header>
-      <Form />
+      <br></br>
+      <UserForm />
     </div>
   );
 }
