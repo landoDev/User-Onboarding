@@ -73,7 +73,7 @@ const UserForm = ({values, errors, touched, status}) =>{
                 <label htmlFor='tosCheck'>I am Force-sensitive: 
                     <Field id='tosCheck' className='checkmark' name='tosCheck' type='checkbox' checked={values.tosCheck}/>
                 </label>
-                <button type='submit'>SUBMIT!</button>
+                <button type='submit'>SURRENDER!</button>
             </Form>
             {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
             {users.map(user => {
